@@ -59,7 +59,9 @@ Temporary Items
 #############
 *.suo
 
+
 # Build Folders
 ###############
 FileChanger/bin/*
 FileChanger/obj/*
+
