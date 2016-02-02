@@ -10,12 +10,12 @@ namespace FileChanger
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
-        private System.Windows.Forms.FolderBrowserDialog openDialog = 
+        private readonly System.Windows.Forms.FolderBrowserDialog _openDialog = 
             new System.Windows.Forms.FolderBrowserDialog();
 
-        private string folderName =null;
+        private string _folderName;
         
 
         public MainWindow()
@@ -29,22 +29,22 @@ namespace FileChanger
 
         private void SourceButton_Click(object sender, RoutedEventArgs e)
         {
-           var result = openDialog.ShowDialog();
+           var result = _openDialog.ShowDialog();
             if (result == System.Windows.Forms.DialogResult.OK)
             {
-                var textfromDialog = openDialog.SelectedPath;
+                var textfromDialog = _openDialog.SelectedPath;
                 SourceTextBox.Text = textfromDialog;
-                folderName = Path.GetFileName(SourceTextBox.Text);
+                _folderName = Path.GetFileName(SourceTextBox.Text);
             }
         }
 
         private void DestinationButton_Click(object sender, RoutedEventArgs e)
         {
             DestinationTextBox.Foreground = Brushes.Black;
-            var result = openDialog.ShowDialog();
+            var result = _openDialog.ShowDialog();
             if (result == System.Windows.Forms.DialogResult.OK)
             {
-                DestinationTextBox.Text = openDialog.SelectedPath;
+                DestinationTextBox.Text = _openDialog.SelectedPath;
             }
         }
 
@@ -55,7 +55,7 @@ namespace FileChanger
             str.Append("\"");
             str.Append(DestinationTextBox.Text);
             str.Append("\\");
-            str.Append(folderName);
+            str.Append(_folderName);
             str.Append("\" ");
             str.Append("\"");
             str.Append(SourceTextBox.Text);
