@@ -2,7 +2,11 @@
 using System.IO;
 using System.Text;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Forms;
+using System.Windows.Input;
 using System.Windows.Media;
+using Clipboard = System.Windows.Clipboard;
 
 
 namespace FileChanger
@@ -12,8 +16,8 @@ namespace FileChanger
     /// </summary>
     public partial class MainWindow
     {
-        private readonly System.Windows.Forms.FolderBrowserDialog _openDialog = 
-            new System.Windows.Forms.FolderBrowserDialog();
+        private readonly FolderBrowserDialog _openDialog = 
+            new FolderBrowserDialog();
 
         private string _folderName;
         
@@ -22,7 +26,8 @@ namespace FileChanger
         {
             InitializeComponent();
 
-            
+            DownloadProgrssBar.Visibility = Visibility.Hidden;
+            DownloadingFileLabel.Visibility = Visibility.Hidden;
             //Add code here
 
         }
@@ -101,6 +106,23 @@ namespace FileChanger
             {
                 HideTextBox.Text = _openDialog.SelectedPath;
             }
+        }
+
+        private void DownloadTextBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DownloadTextBox.Text = Clipboard.GetText();
+        }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            SearchAndProcess.GetResults(DownloadTextBox.Text);
+        }
+
+        private void DownloadButton_Click(object sender, RoutedEventArgs e)
+        {
+            //SearchAndProcess.DownloadSong(DownloadListBox.SelectedItem.ToString());
+            var model = (DownloadDataModel)DownloadDataGrid.SelectedItem;
+            SearchAndProcess.DownloadSong(model.Url);
         }
 
         

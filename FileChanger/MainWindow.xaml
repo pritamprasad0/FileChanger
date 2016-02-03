@@ -1,9 +1,9 @@
 ﻿<Window x:Class="FileChanger.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="500" Width="800">
+        Title="MainWindow" Height="600" Width="800">
     <Grid>
-        <TabControl HorizontalAlignment="Left" Height="450" Margin="10,10,0,0" VerticalAlignment="Top" Width="770">
+        <TabControl HorizontalAlignment="Left" Height="550" Margin="10,10,0,0" VerticalAlignment="Top" Width="770">
             <TabItem x:Name="Junction" Header="Junction" Loaded="Junction_Loaded" Height="23" VerticalAlignment="Bottom">
                 <Grid Background="#FFE5E5E5" Margin="0,0,0,0">
                     <TextBox x:Name="SourceTextBox" HorizontalAlignment="Left" Height="25" Margin="100,30,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="500"/>
@@ -23,8 +23,28 @@
                     <Label Content="Select Folder" HorizontalAlignment="Left" Margin="29,19,0,0" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
+            <TabItem x:Name="DownloadTab" Header="Download">
+                <Grid Background="AntiqueWhite">
+                    <TextBox x:Name="DownloadTextBox" HorizontalAlignment="Left" Height="23" Margin="40,30,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="550" PreviewMouseDown="DownloadTextBox_PreviewMouseDown"/>
+                    <Button x:Name="SearchButton" Content="Search" HorizontalAlignment="Left" Margin="610,30,0,0" VerticalAlignment="Top" Width="100" Click="SearchButton_Click"/>
+                    <!--<ListBox x:FieldModifier="public" x:Name="DownloadListBox" HorizontalAlignment="Left" Height="280"  Margin="40,75,0,0" VerticalAlignment="Top" Width="550"/>-->
+                    <DataGrid x:Name="DownloadDataGrid" x:FieldModifier="public" ItemsSource="{Binding}" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="339"  Margin="40,75,0,0" VerticalAlignment="Top" Width="670">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn x:Name="Column1" Header="File Name" Binding="{Binding FileName}"/>
+                            <DataGridTextColumn x:Name="Column2" Header="URL" Binding="{Binding Url}"/>
+                            <DataGridTextColumn x:Name="Column3" Header="File Size" Binding="{Binding FileSize}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button x:Name="DownloadButton" Content="Download" HorizontalAlignment="Left" Margin="610,480,0,0" VerticalAlignment="Top" Width="100" Click="DownloadButton_Click"/>
+                    <RadioButton x:FieldModifier="public" x:Name="emp3world" Content="emp3World" HorizontalAlignment="Left" Margin="131,434,0,0" VerticalAlignment="Top"/>
+                    <RadioButton x:FieldModifier="public" x:Name="mp3skull" Content="Mp3Skull" HorizontalAlignment="Left" Margin="40,434,0,0" VerticalAlignment="Top"/>
+                    <ProgressBar x:Name="DownloadProgrssBar" x:FieldModifier="public" HorizontalAlignment="Left" Height="22" Margin="40,480,0,0" VerticalAlignment="Top" Width="550"/>
+                    <Label x:Name="DownloadingFileLabel" x:FieldModifier="public" Content="Downloading File " HorizontalAlignment="Left" Margin="35,455,0,0" VerticalAlignment="Top" RenderTransformOrigin="-6,0.231"/>
+                    <Label x:FieldModifier="public" x:Name="FileNameLabel" Content="" HorizontalAlignment="Left" Margin="131,455,0,0" VerticalAlignment="Top" RenderTransformOrigin="-6,0.231"/>
+                </Grid>
+            </TabItem>
             <TabItem Header="Temp">
-                <Grid Background="AntiqueWhite"></Grid>
+                <Grid Background="AntiqueWhite"/>
             </TabItem>
         </TabControl>
 
