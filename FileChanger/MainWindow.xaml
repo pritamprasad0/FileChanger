@@ -23,24 +23,38 @@
                     <Label Content="Select Folder" HorizontalAlignment="Left" Margin="29,19,0,0" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="DownloadTab" Header="Download">
+            <TabItem x:Name="DownloadTab" Header="Download" Loaded="DownloadTab_Loaded">
                 <Grid Background="AntiqueWhite">
-                    <TextBox x:Name="DownloadTextBox" HorizontalAlignment="Left" Height="23" Margin="40,30,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="550" PreviewMouseDown="DownloadTextBox_PreviewMouseDown"/>
-                    <Button x:Name="SearchButton" Content="Search" HorizontalAlignment="Left" Margin="610,30,0,0" VerticalAlignment="Top" Width="100" Click="SearchButton_Click"/>
+                    <TextBox x:Name="DownloadTextBox" KeyUp="TextBox_KeyEnterUpdate" HorizontalAlignment="Left" Height="23" Margin="40,30,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="400" PreviewMouseDoubleClick="DownloadTextBox_PreviewMouseDoubleClick">
+                        <!--<TextBox.InputBindings>
+                            <KeyBinding Command="{Binding SomeCommand}" Key="Return" />
+                            <KeyBinding Command="{Binding SomeCommand}" Key="Enter" />
+                        </TextBox.InputBindings>-->
+                    </TextBox>
+                    <Button x:Name="SearchButton" Content="Search" HorizontalAlignment="Left" Margin="620,30,0,0" VerticalAlignment="Top" Width="100" Click="SearchButton_Click"/>
                     <!--<ListBox x:FieldModifier="public" x:Name="DownloadListBox" HorizontalAlignment="Left" Height="280"  Margin="40,75,0,0" VerticalAlignment="Top" Width="550"/>-->
-                    <DataGrid x:Name="DownloadDataGrid" x:FieldModifier="public" ItemsSource="{Binding}" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="339"  Margin="40,75,0,0" VerticalAlignment="Top" Width="670">
+                    <DataGrid x:Name="DownloadDataGrid" x:FieldModifier="public" IsReadOnly="True" ItemsSource="{Binding}" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="340"  Margin="40,75,0,0" VerticalAlignment="Top" Width="670" >
+                        <DataGrid.Resources>
+                            <Style TargetType="DataGridRow">
+                                <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"></EventSetter>
+                            </Style>
+                        </DataGrid.Resources>
                         <DataGrid.Columns>
                             <DataGridTextColumn x:Name="Column1" Header="File Name" Binding="{Binding FileName}"/>
                             <DataGridTextColumn x:Name="Column2" Header="URL" Binding="{Binding Url}"/>
                             <DataGridTextColumn x:Name="Column3" Header="File Size" Binding="{Binding FileSize}"/>
                         </DataGrid.Columns>
+                        <!--<DataGrid.InputBindings>
+                            <MouseBinding MouseAction="LeftDoubleClick"
+                          Command="{Binding Path=DownloadDataGrid_MouseDoubleClick}"
+                          CommandParameter="{Binding ElementName=DownloadDataGrid, Path=SelectedItem}"/>
+                        </DataGrid.InputBindings>-->
                     </DataGrid>
-                    <Button x:Name="DownloadButton" Content="Download" HorizontalAlignment="Left" Margin="610,480,0,0" VerticalAlignment="Top" Width="100" Click="DownloadButton_Click"/>
-                    <RadioButton x:FieldModifier="public" x:Name="emp3world" Content="emp3World" HorizontalAlignment="Left" Margin="131,434,0,0" VerticalAlignment="Top"/>
-                    <RadioButton x:FieldModifier="public" x:Name="mp3skull" Content="Mp3Skull" HorizontalAlignment="Left" Margin="40,434,0,0" VerticalAlignment="Top"/>
-                    <ProgressBar x:Name="DownloadProgrssBar" x:FieldModifier="public" HorizontalAlignment="Left" Height="22" Margin="40,480,0,0" VerticalAlignment="Top" Width="550"/>
+                    <Button x:Name="DownloadButton" Content="Download" HorizontalAlignment="Left" Margin="620,480,0,0" VerticalAlignment="Top" Width="100" Click="DownloadButton_Click"/>
+                    <ProgressBar x:Name="DownloadProgrssBar" x:FieldModifier="public" HorizontalAlignment="Left" Height="22" Margin="40,480,0,0" VerticalAlignment="Top" Width="560"/>
                     <Label x:Name="DownloadingFileLabel" x:FieldModifier="public" Content="Downloading File " HorizontalAlignment="Left" Margin="35,455,0,0" VerticalAlignment="Top" RenderTransformOrigin="-6,0.231"/>
                     <Label x:FieldModifier="public" x:Name="FileNameLabel" Content="" HorizontalAlignment="Left" Margin="131,455,0,0" VerticalAlignment="Top" RenderTransformOrigin="-6,0.231"/>
+                    <ComboBox x:FieldModifier="public" x:Name="WebsiteComboBox" HorizontalAlignment="Left" Margin="457,30,0,0" VerticalAlignment="Top" Width="150"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Temp">

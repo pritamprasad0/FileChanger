@@ -19,11 +19,11 @@ namespace FileChanger
     {
         public static void GetResults(string searchquery)
         {
-            if (((MainWindow) Application.Current.MainWindow).emp3world.IsChecked == true)
+            if (((MainWindow) Application.Current.MainWindow).WebsiteComboBox.Text == DownloadDataModel.Emp3Website)
             {
                 DownloadFromemp3World(searchquery);
             }
-            else if (((MainWindow) Application.Current.MainWindow).mp3skull.IsChecked == true)
+            else if (((MainWindow)Application.Current.MainWindow).WebsiteComboBox.Text == DownloadDataModel.Mp3skullWebsite);
             {
                 DownloadFromMp3Skull(searchquery);
             }

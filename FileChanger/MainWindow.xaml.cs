@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using Clipboard = System.Windows.Clipboard;
+using Control = System.Windows.Controls.Control;
 
 
 namespace FileChanger
@@ -26,9 +27,9 @@ namespace FileChanger
         {
             InitializeComponent();
 
-            DownloadProgrssBar.Visibility = Visibility.Hidden;
-            DownloadingFileLabel.Visibility = Visibility.Hidden;
-            //Add code here
+            
+
+            
 
         }
 
@@ -108,12 +109,7 @@ namespace FileChanger
             }
         }
 
-        private void DownloadTextBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            DownloadTextBox.Text = Clipboard.GetText();
-        }
-
-        private void SearchButton_Click(object sender, RoutedEventArgs e)
+       private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
             SearchAndProcess.GetResults(DownloadTextBox.Text);
         }
@@ -125,6 +121,46 @@ namespace FileChanger
             SearchAndProcess.DownloadSong(model.Url);
         }
 
-        
+        private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            DownloadButton_Click(sender, e);
+        }
+
+        private void DownloadTab_Loaded(object sender, RoutedEventArgs e)
+        {
+            //var dataGridRowStyle = new Style(typeof(DataGridRow));
+            //dataGridRowStyle.Setters.Add(new EventSetter(MouseDoubleClickEvent, new MouseButtonEventHandler(DownloadDataGrid_MouseDoubleClick)));
+            //DownloadDataGrid.RowStyle = dataGridRowStyle;
+
+            
+            DownloadProgrssBar.Visibility = Visibility.Hidden;
+            DownloadingFileLabel.Visibility = Visibility.Hidden;
+
+            AddDataToListBox();
+
+        }
+
+        private void AddDataToListBox()
+        {
+            WebsiteComboBox.Items.Add("emp3world");
+            WebsiteComboBox.Items.Add("Mp3Skull");
+            WebsiteComboBox.Items.Add("Temp");
+            WebsiteComboBox.SelectedIndex = 0;
+        }
+
+        private void DownloadTextBox_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            DownloadTextBox.Text = Clipboard.GetText();
+        }
+
+        private void TextBox_KeyEnterUpdate(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                SearchAndProcess.GetResults(DownloadTextBox.Text);
+            }
+        }
+
+
     }
 }
